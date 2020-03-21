@@ -14,3 +14,25 @@ var myMap = L.map("map", {
       accessToken: API_KEY
     }
   ).addTo(myMap);
+
+
+
+// Store our API endpoint inside queryUrl
+var queryUrl = "https://corona.lmao.ninja/jhucsse";
+
+// Perform a GET request to the query URL
+d3.json(queryUrl, function(data) {
+// Once we get a response, send the data.features object to the createFeatures function
+createFeatures(data.features);
+});
+
+const url = "https://corona.lmao.ninja/jhucsse";
+
+// Fetch the JSON data and console log it
+d3.json(url).then(function(data) {
+  console.log(data);
+});
+
+// Promise Pending
+const dataPromise = d3.json(url);
+console.log("Data Promise: ", dataPromise);
