@@ -36,3 +36,15 @@ console.log(data);
 const dataPromise = d3.json(url);
 console.log("Data Promise: ", dataPromise);
 
+// Building Metadata
+function buildMetadata(sample) {
+  var MetaData = `/metadata/${sample}`;
+  d3.json(MetaData).then(function(response) {
+    var panelData = d3.select("#sample-metadata");
+    panelData.html("");
+
+    var data = Object.entries(response);
+    data.forEach(function(item) {
+    panelData.append("div").text(item);
+   });
+   })}
