@@ -48,3 +48,63 @@ function buildMetadata(sample) {
     panelData.append("div").text(item);
    });
    })}
+
+
+
+
+// David's Code area for creating a plot
+
+// Store our API endpoint inside queryUrl
+
+// Use d3.json() to fetch data from JSON file
+// Incoming data is internally referred to as incomingData
+d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
+  function filterUSCoronaData(Corona) {
+    return Corona.country == 'US';
+  }
+
+  // Use filter() to pass the function as its argument
+  var USCoronaData = incomingData.filter(filterUSCoronaData);
+
+  //  Check to make sure your are filtering your movies.
+  console.log(USCoronaData);
+
+  // Use the map method with the arrow function to return all the filtered Corona States.
+  var states = USCoronaData.map(USCoronaStates =>  USCoronaStates.province);
+
+  // Use the map method with the arrow function to return all the filtered Corona States.
+  var cities = USCoronaData.map(USCoronaCities =>  USCoronaCities.city);
+
+  // Use the map method with the arrow function to return all the filtered Corona Deaths for each City.
+  var USCityDeaths = USCoronaData.map(USCoronaCityDeaths => USCoronaCityDeaths.stats.deaths);
+
+  // Check the filtered USCityDeaths.
+  console.log(USCityDeaths);
+
+  // Check the filtered US States.
+  console.log(states);
+
+  // Create your trace.
+  var trace = {
+    x: cities,
+    y: USCityDeaths,
+    type: "bar"
+  };
+
+  // Create the data array for our plot
+  var data = [trace];
+
+  // Define the plot layout
+  var layout = {
+    title: "The # of Corona Deaths per City",
+    xaxis: { title: "City" },
+    yaxis: { title: "Deaths"}
+  };
+
+  // Plot the chart to a div tag with id "bar-plot"
+  Plotly.newPlot("bar", data, layout);
+
+});
+
+
+
