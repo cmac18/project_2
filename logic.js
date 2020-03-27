@@ -104,6 +104,27 @@ d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
   // Plot the chart to a div tag with id "bar-plot"
   Plotly.newPlot("bar", data, layout);
 
+
+
+
+// Pie Chart
+var trace1 = {
+  labels: cities,
+  values: USCityDeaths,
+  type: 'pie',
+  textinfo: "label+percent",
+  textposition: 'inside',
+  insidetextorientation: 'radial'
+};
+
+var data = [trace1];
+
+var layout = {
+  title: "'Number of Corona Deaths per City",
+};
+
+Plotly.newPlot("pie", data, layout);
+
 });
 
 
