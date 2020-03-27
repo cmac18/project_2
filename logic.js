@@ -107,25 +107,25 @@ d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
 
 
 
-// Pie Chart
-var trace1 = {
-  labels: cities,
-  values: USCityDeaths,
-  type: 'pie',
-  textinfo: "label+percent",
-  textposition: 'inside',
-  insidetextorientation: 'radial'
-};
+  // Pie Chart
+  var trace1 = {
+    labels: cities,
+    values: USCityDeaths,
+    type: 'pie',
+    textinfo: "label+percent",
+    textposition: 'inside',
+    insidetextorientation: 'radial'
+  };
 
-var data = [trace1];
+  var data = [trace1];
 
-var layout = {
-  title: "'Number of Corona Deaths per City",
-};
+  var layout = {
+    title: "'Number of Corona Deaths per City",
+  };
 
-Plotly.newPlot("pie", data, layout);
+  Plotly.newPlot("pie", data, layout);
 
-});
+  });
 
 
 
