@@ -56,10 +56,14 @@ function buildMetadata(sample) {
 
 // Use d3.json() to fetch data from JSON file
 // Incoming data is internally referred to as incomingData
+
 d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   function filterUSCoronaData(Corona) {
     return Corona.state == 'New York', 'Virginia';
-  }
+
+d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
+  function filterUSCoronaData(Corona) {
+    return Corona.country == 'US';
 
   // Use filter() to pass the function as its argument
   var USCoronaData = incomingData.filter(filterUSCoronaData);
@@ -68,6 +72,7 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   console.log(USCoronaData);
 
   // Use the map method with the arrow function to return all the filtered Corona States.
+
   var states = USCoronaData.map(USCoronaStates =>  USCoronaStates.state);
 
   // Use the map method with the arrow function to return all the filtered Corona Deaths for each City.
@@ -76,6 +81,18 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   // Check the filtered USCityDeaths.
   console.log(USStateDeaths);
 
+  var states = USCoronaData.map(USCoronaStates =>  USCoronaStates.province);
+
+  // Use the map method with the arrow function to return all the filtered Corona States.
+  var cities = USCoronaData.map(USCoronaCities =>  USCoronaCities.city);
+
+  // Use the map method with the arrow function to return all the filtered Corona Deaths for each City.
+  var USCityDeaths = USCoronaData.map(USCoronaCityDeaths => USCoronaCityDeaths.stats.deaths);
+
+  // Check the filtered USCityDeaths.
+  console.log(USCityDeaths);
+
+
   // Check the filtered US States.
   console.log(states);
 
@@ -83,6 +100,10 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   var trace = {
     x: states,
     y: USStateDeaths,
+
+    x: cities,
+    y: USCityDeaths,
+
     type: "bar"
   };
 
@@ -91,13 +112,19 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
 
   // Define the plot layout
   var layout = {
+
     title: "The # of Corona Deaths per State",
     xaxis: { title: "State" },
+
+    title: "The # of Corona Deaths per City",
+    xaxis: { title: "City" },
+
     yaxis: { title: "Deaths"}
   };
 
   // Plot the chart to a div tag with id "bar-plot"
   Plotly.newPlot("bar", data, layout);
+
 
 
 
@@ -177,4 +204,26 @@ function optionChanged(newSample) {
 }
 
 init();
+=======
+  // Pie Chart
+  var trace1 = {
+    labels: cities,
+    values: USCityDeaths,
+    type: 'pie',
+    textinfo: "label+percent",
+    textposition: 'inside',
+    insidetextorientation: 'radial'
+  };
+
+  var data = [trace1];
+
+  var layout = {
+    title: "'Number of Corona Deaths per City",
+  };
+
+  Plotly.newPlot("pie", data, layout);
+
+  });
+
+
 
