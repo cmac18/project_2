@@ -34,9 +34,10 @@
     <div class="row">
       <div class="col-md-2">
         <div class="well">
-          <h5>Countries:</h5>
+          <h5>US Statistics:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
+        <div id="pie"></div>
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Virus Info</h3>
@@ -48,6 +49,10 @@
         <!--to hold map-->
         <div id="map"></div>
       </div>
+      <div class="col-md-5">
+        <!--to hold pie chart with counts: active, death, and recovered-->
+      </div>
+
     </div>
     <div class="row">
       <div class="col-md-12">
