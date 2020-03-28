@@ -73,8 +73,14 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   // Use the map method with the arrow function to return all the filtered Corona Deaths for each City.
   var USStateDeaths = USCoronaData.map(USCoronaStateDeaths => USCoronaStateDeaths.deaths);
 
+  // Getting active cases
+  var USCoronaActive = USCoronaData.map(USCoronaActive => USCoronaActive.active);
+
   // Check the filtered USCityDeaths.
   console.log(USStateDeaths);
+
+  // Check the filtered USCoronaActive
+  console.log(USCoronaActive);
 
   // Check the filtered US States.
   console.log(states);
@@ -105,7 +111,7 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
 // Pie Chart
 var trace1 = {
   labels: states,
-  values: USStateDeaths,
+  values: USCoronaActive,
   type: 'pie',
   textinfo: "label+percent",
   textposition: 'inside',
@@ -115,66 +121,10 @@ var trace1 = {
 var data = [trace1];
 
 var layout = {
-  title: "'Number of Corona Deaths per State",
+  title: "'Number of Active Cases per State",
 };
 
 Plotly.newPlot("pie", data, layout);
 
 });
-
-
-//Build drop down
-var stateurl = "https://corona.lmao.ninja/states";
-console.log("state data1:", stateurl);
-  function buildMetadata(sample) {
-    d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
-      function filterData(Corona) {
-        return Corona.state == 'New York', 'Virginia';
-      }
-      // Filter the data for the object with the desired sample number
-      var resultArray = Corona.filter(state => state == sample);
-      var result = resultArray[0];
-      // Use d3 to select the panel with id of `#sample-metadata`
-      var PANEL = d3.select("#sample-metadata");
-  
-      // Use `.html("") to clear any existing metadata
-      PANEL.html("");
-  
-      // Use `Object.entries` to add each key and value pair to the panel
-      // Hint: Inside the loop, you will need to use d3 to append new
-      // tags for each key-value in the metadata.
-      Object.entries(state).forEach(([key, value]) => {
-        PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
-      });
-  
-  
-    }) 
-}
-//To change chart data
-/////////////////////////////////////////////////////////
-var stateurl = "https://corona.lmao.ninja/states";
-console.log("state data2:", stateurl);
-function init() {
-  var selector = d3.select("#selDataset");
-
-  d3.json("https://corona.lmao.ninja/states").then((samplestate) => {
-    samplestate.forEach((sample) => {
-      selector
-        .append("option")
-        .text(sample)
-        .property("value", sample);
-    });
-
-    const firstSample = samplestate[0];
-    buildCharts(firstSample);
-    buildMetadata(firstSample);
-  });
-}
-
-function optionChanged(newSample) {
-  buildCharts(newSample);
-  buildMetadata(newSample);
-}
-
-init();
 

@@ -26,35 +26,33 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-12 jumbotron text-center">
-        <h1>The Corona Kreep</h1>
-        <p>Use the interactive charts below to explore the dataset</p>
+      <div class="col-md-100% jumbotron text-center">
+        <h3>The Corona Kreep</h3>
+        <p><h5>Use the interactive charts below to explore the dataset</h5></p>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-2">
+    <div class="row-4">
+      <div class="col-md-5">
         <div class="well">
-          <h5>US Statistics:</h5>
+          <h5>Data Shown:</h5>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
-        <div id="pie"></div>
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Virus Info</h3>
           </div>
           <div id="sample-metadata" class="panel-body"></div>
+          <div id="pie"></div>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-3">
         <!--to hold map-->
         <div id="map"></div>
-      </div>
-      <div class="col-md-5">
         <!--to hold pie chart with counts: active, death, and recovered-->
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-8">
         <!--to hold city/province bar chartdata-->
         <div id="bar"></div>
       </div>
