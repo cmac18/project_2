@@ -78,9 +78,16 @@ d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
   // Use the map method with the arrow function to return all the filtered Corona Deaths for each City.
   var USStateDeaths = USCoronaData.map(USCoronaStateDeaths => USCoronaStateDeaths.deaths);
 
+  // Getting active cases
+  var USCoronaActive = USCoronaData.map(USCoronaActive => USCoronaActive.active);
+
   // Check the filtered USCityDeaths.
   console.log(USStateDeaths);
 
+<<<<<<< HEAD
+  // Check the filtered USCoronaActive
+  console.log(USCoronaActive);
+=======
   var states = USCoronaData.map(USCoronaStates =>  USCoronaStates.province);
 
   // Use the map method with the arrow function to return all the filtered Corona States.
@@ -92,6 +99,7 @@ d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
   // Check the filtered USCityDeaths.
   console.log(USCityDeaths);
 
+>>>>>>> b3a89445c1631936f38e07c9e1a20c519267cad9
 
   // Check the filtered US States.
   console.log(states);
@@ -132,7 +140,7 @@ d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
 // Pie Chart
 var trace1 = {
   labels: states,
-  values: USStateDeaths,
+  values: USCoronaActive,
   type: 'pie',
   textinfo: "label+percent",
   textposition: 'inside',
@@ -142,13 +150,15 @@ var trace1 = {
 var data = [trace1];
 
 var layout = {
-  title: "'Number of Corona Deaths per State",
+  title: "'Number of Active Cases per State",
 };
 
 Plotly.newPlot("pie", data, layout);
 
 });
 
+<<<<<<< HEAD
+=======
 
 //Build drop down
 var stateurl = "https://corona.lmao.ninja/states";
@@ -227,3 +237,4 @@ init();
 
 
 
+>>>>>>> b3a89445c1631936f38e07c9e1a20c519267cad9
