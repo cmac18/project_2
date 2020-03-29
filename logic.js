@@ -56,10 +56,14 @@ function buildMetadata(sample) {
 
 // Use d3.json() to fetch data from JSON file
 // Incoming data is internally referred to as incomingData
+
 d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   function filterUSCoronaData(Corona) {
     return Corona.state == 'New York', 'Virginia';
-  }
+
+d3.json("https://corona.lmao.ninja/jhucsse").then((incomingData) => {
+  function filterUSCoronaData(Corona) {
+    return Corona.country == 'US';
 
   // Use filter() to pass the function as its argument
   var USCoronaData = incomingData.filter(filterUSCoronaData);
@@ -68,6 +72,7 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   console.log(USCoronaData);
 
   // Use the map method with the arrow function to return all the filtered Corona States.
+
   var states = USCoronaData.map(USCoronaStates =>  USCoronaStates.state);
 
   // Use the map method with the arrow function to return all the filtered Corona Deaths for each City.
@@ -79,8 +84,22 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   // Check the filtered USCityDeaths.
   console.log(USStateDeaths);
 
+<<<<<<< HEAD
   // Check the filtered USCoronaActive
   console.log(USCoronaActive);
+=======
+  var states = USCoronaData.map(USCoronaStates =>  USCoronaStates.province);
+
+  // Use the map method with the arrow function to return all the filtered Corona States.
+  var cities = USCoronaData.map(USCoronaCities =>  USCoronaCities.city);
+
+  // Use the map method with the arrow function to return all the filtered Corona Deaths for each City.
+  var USCityDeaths = USCoronaData.map(USCoronaCityDeaths => USCoronaCityDeaths.stats.deaths);
+
+  // Check the filtered USCityDeaths.
+  console.log(USCityDeaths);
+
+>>>>>>> b3a89445c1631936f38e07c9e1a20c519267cad9
 
   // Check the filtered US States.
   console.log(states);
@@ -89,6 +108,10 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
   var trace = {
     x: states,
     y: USStateDeaths,
+
+    x: cities,
+    y: USCityDeaths,
+
     type: "bar"
   };
 
@@ -97,13 +120,19 @@ d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
 
   // Define the plot layout
   var layout = {
+
     title: "The # of Corona Deaths per State",
     xaxis: { title: "State" },
+
+    title: "The # of Corona Deaths per City",
+    xaxis: { title: "City" },
+
     yaxis: { title: "Deaths"}
   };
 
   // Plot the chart to a div tag with id "bar-plot"
   Plotly.newPlot("bar", data, layout);
+
 
 
 
@@ -128,3 +157,84 @@ Plotly.newPlot("pie", data, layout);
 
 });
 
+<<<<<<< HEAD
+=======
+
+//Build drop down
+var stateurl = "https://corona.lmao.ninja/states";
+console.log("state data1:", stateurl);
+  function buildMetadata(sample) {
+    d3.json("https://corona.lmao.ninja/states").then((incomingData) => {
+      function filterData(Corona) {
+        return Corona.state == 'New York', 'Virginia';
+      }
+      // Filter the data for the object with the desired sample number
+      var resultArray = Corona.filter(state => state == sample);
+      var result = resultArray[0];
+      // Use d3 to select the panel with id of `#sample-metadata`
+      var PANEL = d3.select("#sample-metadata");
+  
+      // Use `.html("") to clear any existing metadata
+      PANEL.html("");
+  
+      // Use `Object.entries` to add each key and value pair to the panel
+      // Hint: Inside the loop, you will need to use d3 to append new
+      // tags for each key-value in the metadata.
+      Object.entries(state).forEach(([key, value]) => {
+        PANEL.append("h6").text(`${key.toUpperCase()}: ${value}`);
+      });
+  
+  
+    }) 
+}
+//To change chart data
+/////////////////////////////////////////////////////////
+var stateurl = "https://corona.lmao.ninja/states";
+console.log("state data2:", stateurl);
+function init() {
+  var selector = d3.select("#selDataset");
+
+  d3.json("https://corona.lmao.ninja/states").then((samplestate) => {
+    samplestate.forEach((sample) => {
+      selector
+        .append("option")
+        .text(sample)
+        .property("value", sample);
+    });
+
+    const firstSample = samplestate[0];
+    buildCharts(firstSample);
+    buildMetadata(firstSample);
+  });
+}
+
+function optionChanged(newSample) {
+  buildCharts(newSample);
+  buildMetadata(newSample);
+}
+
+init();
+=======
+  // Pie Chart
+  var trace1 = {
+    labels: cities,
+    values: USCityDeaths,
+    type: 'pie',
+    textinfo: "label+percent",
+    textposition: 'inside',
+    insidetextorientation: 'radial'
+  };
+
+  var data = [trace1];
+
+  var layout = {
+    title: "'Number of Corona Deaths per City",
+  };
+
+  Plotly.newPlot("pie", data, layout);
+
+  });
+
+
+
+>>>>>>> b3a89445c1631936f38e07c9e1a20c519267cad9
