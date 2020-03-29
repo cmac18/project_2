@@ -10,3 +10,9 @@ body {
     height: 635;
     width: 675;
   }
+
+  #bar,
+  body,
+  html {
+    width: 900;
+  }
