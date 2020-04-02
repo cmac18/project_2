@@ -1,18 +1,17 @@
 body {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  
-  #map,
-  body,
-  html {
-    height: 635;
-    width: 675;
-  }
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 
-  #bar,
-  body,
-  html {
-    width: 900;
-  }
+#map,
+body,
+html {
+  height: 400;
+  width: 700;
+}
+#pie {
+  margin-left: 20%;
+  height: 400;
+  width: 300;
+}
